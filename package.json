@@ -1,0 +1,29 @@
+{
+  "name": "@financial-times/n-map-content-to-topper",
+  "version": "0.0.0",
+  "description": "A library for mapping content to a topper on FT.com and the App",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "npx snyk protect || npx snyk protect -d || true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Financial-Times/n-map-content-to-topper.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Financial-Times/n-map-content-to-topper/issues"
+  },
+  "homepage": "https://github.com/Financial-Times/n-map-content-to-topper#readme",
+  "devDependencies": {
+    "@financial-times/n-gage": "^6.0.1",
+    "snyk": "^1.379.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "secret-squirrel",
+      "commit-msg": "secret-squirrel-commitmsg",
+      "pre-push": "make verify -j3"
+    }
+  }
+}
