@@ -8,7 +8,7 @@ const themeImageRatio = {
 
 const isNews = content => content.annotations && content.annotations.find(a => a.prefLabel === 'News');
 
-const getTopperSettings = content => {
+const getTopperSettings = (content, flags = {}) => {
 	content.topper = content.topper || {};
 	//live blogs and news packages
 	if (content.realtime && content.liveBlog ||
@@ -18,7 +18,7 @@ const getTopperSettings = content => {
 		const designTheme = content.package && content.package.design.theme || content.design && content.design.theme;
 		const isStandaloneLiveBlog = !content.package && content.realtime && content.liveBlog;
 
-		const isLoud = designTheme === 'extra' || isStandaloneLiveBlog;
+		const isLoud = designTheme === 'extra' || designTheme === 'extra-wide' || isStandaloneLiveBlog;
 
 		return {
 			layout: null,
@@ -27,6 +27,10 @@ const getTopperSettings = content => {
 			themeImageRatio: 'split',
 			includesImage: true,
 			isExperimental: true,
+			myFtButton: {
+				variant: isLoud ? 'monochrome' : 'standard',
+				followPlusDigestEmail: followPlusDigestEmail(flags)
+			}
 		};
 
 
@@ -60,7 +64,8 @@ const getTopperSettings = content => {
 			},
 			'extra-wide': {
 				bgColour: 'slate',
-				layout: 'split-text-left',
+				//TODO: Find out if the app uses the `extra-wide` theme
+				layout: 'full-bleed-offset',
 				largeHeadline: true
 			}
 		};
@@ -99,7 +104,20 @@ const getTopperSettings = content => {
 			modifiers: [content.topper.layout],
 			includesImage: hasImage
 		};
-
+	} else if (content.subtype === 'podcast') {
+		return {
+			layout: 'branded',
+			backgroundColour: 'slate',
+			isPodcast: true,
+			includesImage: true,
+			fthead: content.mainImage && content.mainImage.url,
+			modifiers: ['branded', 'has-headshot'],
+			standfirst: content.byline,
+			myFtButton: {
+				variant: 'inverse',
+				followPlusDigestEmail: followPlusDigestEmail(flags)
+			}
+		};
 		//Branded regular toppers
 	} else if(content.brandConcept || (content.topper && content.topper.isBranded) || (content.genreConcept && content.genreConcept.id === '6da31a37-691f-4908-896f-2829ebe2309e')) {
 		let fthead = Array.isArray(content.authorConcepts) &&
@@ -138,6 +156,12 @@ const getTopperSettings = content => {
 			isOpinion,
 			headshotTint,
 			fthead,
+			myFtButton: {
+				variant: backgroundColour === 'sky'
+					? 'opinion'
+					: 'standard',
+				followPlusDigestEmail: followPlusDigestEmail(flags)
+			}
 		};
 
 	//everything else gets a regular topper
@@ -147,6 +171,10 @@ const getTopperSettings = content => {
 			backgroundColour: 'paper',
 			includesTeaser: true,
 			modifiers: ['basic'],
+			myFtButton: {
+				variant: 'standard',
+				followPlusDigestEmail: followPlusDigestEmail(flags)
+			}
 		};
 	}
 };
@@ -162,14 +190,33 @@ const hasDarkBackground = (backgroundColour) => {
 	return (darkBackgrounds.indexOf(backgroundColour) > -1);
 };
 
-export default content => {
+const myFtButtonVariant = (backgroundColour) => {
+	let lightBackgroundColour = ['paper', 'wheat', 'white'].includes(backgroundColour);
+	return (!backgroundColour || lightBackgroundColour) ? 'standard' : 'monochrome';
+};
+
+const followPlusDigestEmail = (flags) => {
+	if (flags.onboardingMessaging
+		&& flags.onboardingMessaging
+		&& flags.onboardingMessaging === 'followPlusEmailDigestTooltip') {
+		return true;
+	}
+	return false;
+};
+
+
+module.exports = (content, flags = {}) => {
 	const topper = content.topper || {};
-	const settings = getTopperSettings(content);
+	const settings = getTopperSettings(content, flags);
 	return Object.assign({},
 		topper,
 		{
 			headline: topper.headline || content.title,
 			standfirst: content.descriptionHTML || topper.standfirst || content.standfirst,
+			myFtButton: {
+				variant: myFtButtonVariant(settings.backgroundColour),
+				followPlusDigestEmail: followPlusDigestEmail(flags)
+			},
 			themeImageRatio: themeImageRatio[settings.layout]
 		},
 		settings,
