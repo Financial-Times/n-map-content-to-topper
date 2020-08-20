@@ -2,7 +2,7 @@
   "name": "@financial-times/n-map-content-to-topper",
   "version": "0.0.0",
   "description": "A library for mapping content to a topper on FT.com and the App",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "prepare": "npx snyk protect || npx snyk protect -d || true"
   },
