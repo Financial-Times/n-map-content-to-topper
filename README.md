@@ -1,6 +1,6 @@
 # n-map-content-to-topper
 
-[![CircleCI](https://circleci.com/gh/Financial-Times/n-map-content-to-topper.svg?style=svg)](https://circleci.com/gh/Financial-Times/n-map-content-to-topper)
+[![CircleCI](https://circleci.com/gh/Financial-Times/n-map-content-to-topper.svg?style=svg&circle-token=934a725e2f363da1ac042947bb785c4d45795339)](https://circleci.com/gh/Financial-Times/n-map-content-to-topper)
 
 A library for mapping content to a topper on FT.com and the App.
 
