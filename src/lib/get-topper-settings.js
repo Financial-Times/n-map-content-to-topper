@@ -122,8 +122,6 @@ const usePackageTopper = (content) => {
 };
 
 const useEditoriallySelectedTopper = (content) => {
-	// TODO: Is `hasImage` ever false because `full-bleed-text` is not in the `themeImageRatio` object?
-	const hasImage = content.topper.layout !== 'full-bleed-text';
 	let backgroundColour;
 
 	// Convert old palette colours to new palette colours from Methode
@@ -145,7 +143,7 @@ const useEditoriallySelectedTopper = (content) => {
 		largeHeadline: true,
 		backgroundColour,
 		modifiers: [content.topper.layout],
-		includesImage: hasImage
+		includesImage: true
 	};
 };
 
