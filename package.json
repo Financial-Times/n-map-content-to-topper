@@ -17,6 +17,7 @@
   "homepage": "https://github.com/Financial-Times/n-map-content-to-topper#readme",
   "devDependencies": {
     "@financial-times/n-gage": "^6.0.1",
+    "bower": "^1.8.8",
     "chai": "^4.2.0",
     "mocha": "^8.1.1",
     "proxyquire": "^2.1.3",
