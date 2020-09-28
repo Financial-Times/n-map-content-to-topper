@@ -99,8 +99,7 @@ const usePackageTopper = (content) => {
 		},
 		'extra-wide': {
 			bgColour: 'slate',
-			// TODO: Find out if the App uses an `extra-wide` theme
-			layout: 'full-bleed-offset',
+			layout: 'split-text-left',
 			largeHeadline: true
 		}
 	};
