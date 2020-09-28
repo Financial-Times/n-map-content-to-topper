@@ -190,11 +190,11 @@ describe('Get topper settings', () => {
 			});
 
 			expect(topper).to.deep.include({
-				layout: 'full-bleed-offset',
+				layout: 'split-text-left',
 				largeHeadline: true,
 				backgroundColour: 'slate',
 				modifiers: [
-					'full-bleed-offset',
+					'split-text-left',
 					'package',
 					'package-extra-wide'
 				]
