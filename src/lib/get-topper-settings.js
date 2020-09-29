@@ -10,6 +10,8 @@ const isNews = (content) =>
 	content.annotations &&
 	content.annotations.some((annotation) => annotation.prefLabel === 'News');
 
+const isLiveBlogV2 = (content) => content.type === 'live-blog-package';
+
 const isLiveBlogOrPackage = (content) =>
 	(content.realtime && content.liveBlog) ||
 	(content.package &&
@@ -42,6 +44,14 @@ const isBranded = (content) =>
 
 const followPlusDigestEmail = (flags) => {
 	return flags.onboardingMessaging === 'followPlusEmailDigestTooltip';
+};
+
+const useLiveBlogV2 = () => {
+	return {
+		largeHeadline: true,
+		backgroundColour: 'paper',
+		modifiers: ['full-bleed-offset']
+	}
 };
 
 const useLiveBlogOrPackageTopper = (content, flags) => {
@@ -217,7 +227,9 @@ const useBrandedTopper = (content, flags) => {
 const getTopperSettings = (content, flags = {}) => {
 	content.topper = content.topper || {};
 
-	if (isLiveBlogOrPackage(content)) {
+	if (isLiveBlogV2(content)) {
+		return useLiveBlogV2();
+	} else if (isLiveBlogOrPackage(content)) {
 		return useLiveBlogOrPackageTopper(content, flags);
 	} else if (isPackageArticlesWithExtraTheme(content)) {
 		return useExtraThemeTopper();
