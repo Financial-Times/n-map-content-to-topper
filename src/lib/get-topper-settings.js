@@ -10,10 +10,13 @@ const isNews = (content) =>
 	content.annotations &&
 	content.annotations.some((annotation) => annotation.prefLabel === 'News');
 
+const isLiveBlogV1 = (content) =>
+	content.type === 'live-blog' && content.realtime;
+
 const isLiveBlogV2 = (content) => content.type === 'live-blog-package';
 
-const isLiveBlogOrPackage = (content) =>
-	(content.realtime && content.liveBlog) ||
+const isLiveBlogV1OrPackage = (content) =>
+	isLiveBlogV1(content) ||
 	(content.package &&
 		isNews(content.package) &&
 		content.package.contains[0].id === content.id) ||
@@ -51,15 +54,14 @@ const useLiveBlogV2 = () => {
 		largeHeadline: true,
 		backgroundColour: 'paper',
 		modifiers: ['full-bleed-offset']
-	}
+	};
 };
 
-const useLiveBlogOrPackageTopper = (content, flags) => {
+const useLiveBlogV1OrPackageTopper = (content, flags) => {
 	const designTheme =
 		(content.package && content.package.design.theme) ||
 		(content.design && content.design.theme);
-	const isStandaloneLiveBlog =
-		!content.package && content.realtime && content.liveBlog;
+	const isStandaloneLiveBlog = isLiveBlogV1(content);
 
 	const isLoud =
 		designTheme === 'extra' ||
@@ -229,8 +231,8 @@ const getTopperSettings = (content, flags = {}) => {
 
 	if (isLiveBlogV2(content)) {
 		return useLiveBlogV2();
-	} else if (isLiveBlogOrPackage(content)) {
-		return useLiveBlogOrPackageTopper(content, flags);
+	} else if (isLiveBlogV1OrPackage(content)) {
+		return useLiveBlogV1OrPackageTopper(content, flags);
 	} else if (isPackageArticlesWithExtraTheme(content)) {
 		return useExtraThemeTopper();
 	} else if (isPackage(content)) {

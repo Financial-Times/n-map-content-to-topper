@@ -20,8 +20,8 @@ describe('Get topper settings', () => {
 	describe('Live blog', () => {
 		it('returns the live blog v1 topper', () => {
 			const topper = getTopperSettings({
+				type: 'live-blog',
 				realtime: true,
-				liveBlog: { status: 'inprogress' }
 			});
 
 			expect(topper).to.deep.include({
