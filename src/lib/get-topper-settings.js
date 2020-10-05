@@ -11,6 +11,11 @@ const isNews = (content) =>
 	content.annotations.some((annotation) => annotation.prefLabel === 'News');
 
 const isLiveBlogV1 = (content) =>
+	/**
+	 * The `live-blog` content type is not used in Elasticsearch. The content type is
+	 * overridden from `article` to `live-blog` in `next-article` here:
+	 * https://github.com/Financial-Times/next-article/blob/574581adc200e60051e3ca9c7fd5e9a6e16cee82/server/controllers/content.js#L29-L32
+	 */
 	content.type === 'live-blog' && content.realtime;
 
 const isLiveBlogV2 = (content) => content.type === 'live-blog-package';
