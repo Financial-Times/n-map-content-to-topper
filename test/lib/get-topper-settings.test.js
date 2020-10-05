@@ -18,10 +18,10 @@ describe('Get topper settings', () => {
 	});
 
 	describe('Live blog', () => {
-		it('returns the live blog topper', () => {
+		it('returns the live blog v1 topper', () => {
 			const topper = getTopperSettings({
+				type: 'live-blog',
 				realtime: true,
-				liveBlog: { status: 'inprogress' }
 			});
 
 			expect(topper).to.deep.include({
@@ -31,6 +31,18 @@ describe('Get topper settings', () => {
 					variant: 'monochrome',
 					followPlusDigestEmail: false
 				}
+			});
+		});
+
+		it('returns the live blog v2 topper', () => {
+			const topper = getTopperSettings({
+				type: 'live-blog-package'
+			});
+
+			expect(topper).to.deep.include({
+				largeHeadline: true,
+				backgroundColour: 'paper',
+				modifiers: ['full-bleed-offset']
 			});
 		});
 	});

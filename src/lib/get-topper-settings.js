@@ -10,8 +10,18 @@ const isNews = (content) =>
 	content.annotations &&
 	content.annotations.some((annotation) => annotation.prefLabel === 'News');
 
-const isLiveBlogOrPackage = (content) =>
-	(content.realtime && content.liveBlog) ||
+const isLiveBlogV1 = (content) =>
+	/**
+	 * The `live-blog` content type is not used in Elasticsearch. The content type is
+	 * overridden from `article` to `live-blog` in `next-article` here:
+	 * https://github.com/Financial-Times/next-article/blob/574581adc200e60051e3ca9c7fd5e9a6e16cee82/server/controllers/content.js#L29-L32
+	 */
+	content.type === 'live-blog' && content.realtime;
+
+const isLiveBlogV2 = (content) => content.type === 'live-blog-package';
+
+const isLiveBlogV1OrPackage = (content) =>
+	isLiveBlogV1(content) ||
 	(content.package &&
 		isNews(content.package) &&
 		content.package.contains[0].id === content.id) ||
@@ -44,12 +54,19 @@ const followPlusDigestEmail = (flags) => {
 	return flags.onboardingMessaging === 'followPlusEmailDigestTooltip';
 };
 
-const useLiveBlogOrPackageTopper = (content, flags) => {
+const useLiveBlogV2 = () => {
+	return {
+		largeHeadline: true,
+		backgroundColour: 'paper',
+		modifiers: ['full-bleed-offset']
+	};
+};
+
+const useLiveBlogV1OrPackageTopper = (content, flags) => {
 	const designTheme =
 		(content.package && content.package.design.theme) ||
 		(content.design && content.design.theme);
-	const isStandaloneLiveBlog =
-		!content.package && content.realtime && content.liveBlog;
+	const isStandaloneLiveBlog = isLiveBlogV1(content);
 
 	const isLoud =
 		designTheme === 'extra' ||
@@ -217,8 +234,10 @@ const useBrandedTopper = (content, flags) => {
 const getTopperSettings = (content, flags = {}) => {
 	content.topper = content.topper || {};
 
-	if (isLiveBlogOrPackage(content)) {
-		return useLiveBlogOrPackageTopper(content, flags);
+	if (isLiveBlogV2(content)) {
+		return useLiveBlogV2();
+	} else if (isLiveBlogV1OrPackage(content)) {
+		return useLiveBlogV1OrPackageTopper(content, flags);
 	} else if (isPackageArticlesWithExtraTheme(content)) {
 		return useExtraThemeTopper();
 	} else if (isPackage(content)) {
