@@ -142,16 +142,16 @@ const useEditoriallySelectedTopper = (content) => {
 
 	// Convert old palette colours to new palette colours from Methode
 	if (content.topper.layout === 'full-bleed-offset') {
-		backgroundColour = 'paper';
+		backgroundColour = 'wheat';
 	} else if (
 		content.topper.backgroundColour === 'pink' ||
 		content.topper.backgroundColour === 'auto'
 	) {
-		backgroundColour = 'paper';
+		backgroundColour = 'wheat';
 	} else if (content.topper.backgroundColour === 'blue') {
 		backgroundColour = 'oxford';
 	} else {
-		backgroundColour = content.topper.backgroundColour || 'paper';
+		backgroundColour = content.topper.backgroundColour || 'wheat';
 	}
 
 	return {
