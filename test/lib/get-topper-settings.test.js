@@ -223,18 +223,18 @@ describe('Get topper settings', () => {
 			expect(topper).to.deep.include({
 				layout: 'full-bleed-offset',
 				largeHeadline: true,
-				backgroundColour: 'paper',
+				backgroundColour: 'wheat',
 				modifiers: ['full-bleed-offset'],
 				includesImage: true
 			});
 		});
 
-		it('sets the `backgroundColour` to `paper` if undefined', () => {
+		it('sets the `backgroundColour` to `wheat` if undefined', () => {
 			const topper = getTopperSettings({
 				topper: { layout: 'split-text-center' }
 			});
 
-			expect(topper.backgroundColour).to.equal('paper');
+			expect(topper.backgroundColour).to.equal('wheat');
 		});
 	});
 
