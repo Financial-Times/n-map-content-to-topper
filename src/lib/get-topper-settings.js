@@ -6,33 +6,13 @@ const themeImageRatio = {
 	'full-bleed-offset': 'full-bleed'
 };
 
-const isNews = (content) =>
-	content.annotations &&
-	content.annotations.some((annotation) => annotation.prefLabel === 'News');
-
-const isLiveBlogV1 = (content) =>
-	/**
-	 * The `live-blog` content type is not used in Elasticsearch. The content type is
-	 * overridden from `article` to `live-blog` in `next-article` here:
-	 * https://github.com/Financial-Times/next-article/blob/574581adc200e60051e3ca9c7fd5e9a6e16cee82/server/controllers/content.js#L29-L32
-	 */
-	content.type === 'live-blog' && content.realtime;
-
 const isLiveBlogV2 = (content) => content.type === 'live-blog-package';
-
-const isLiveBlogV1OrPackage = (content) =>
-	isLiveBlogV1(content) ||
-	(content.package &&
-		isNews(content.package) &&
-		content.package.contains[0].id === content.id) ||
-	(content.type === 'package' && isNews(content));
 
 const isPackageArticlesWithExtraTheme = (content) =>
 	content.containedIn &&
 	content.containedIn.length &&
 	content.package &&
-	content.package.design.theme.includes('extra') &&
-	!isNews(content.package);
+	content.package.design.theme.includes('extra');
 
 const isPackage = (content) =>
 	content.type === 'package' && content.design && content.design.theme;
@@ -59,31 +39,6 @@ const useLiveBlogV2 = () => {
 		largeHeadline: true,
 		backgroundColour: 'paper',
 		modifiers: ['full-bleed-offset']
-	};
-};
-
-const useLiveBlogV1OrPackageTopper = (content, flags) => {
-	const designTheme =
-		(content.package && content.package.design.theme) ||
-		(content.design && content.design.theme);
-	const isStandaloneLiveBlog = isLiveBlogV1(content);
-
-	const isLoud =
-		designTheme === 'extra' ||
-		designTheme === 'extra-wide' ||
-		isStandaloneLiveBlog;
-
-	return {
-		layout: null,
-		backgroundColour: isLoud ? 'crimson' : 'wheat',
-		modifiers: ['news-package'],
-		themeImageRatio: 'split',
-		includesImage: true,
-		isExperimental: true,
-		myFtButton: {
-			variant: isLoud ? 'monochrome' : 'standard',
-			followPlusDigestEmail: followPlusDigestEmail(flags)
-		}
 	};
 };
 
@@ -236,8 +191,6 @@ const getTopperSettings = (content, flags = {}) => {
 
 	if (isLiveBlogV2(content)) {
 		return useLiveBlogV2();
-	} else if (isLiveBlogV1OrPackage(content)) {
-		return useLiveBlogV1OrPackageTopper(content, flags);
 	} else if (isPackageArticlesWithExtraTheme(content)) {
 		return useExtraThemeTopper();
 	} else if (isPackage(content)) {
