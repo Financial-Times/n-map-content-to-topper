@@ -34,11 +34,12 @@ const followPlusDigestEmail = (flags) => {
 	return flags.onboardingMessaging === 'followPlusEmailDigestTooltip';
 };
 
-const useLiveBlogV2 = () => {
+const useLiveBlogV2 = (content) => {
 	return {
 		largeHeadline: true,
 		backgroundColour: 'paper',
-		modifiers: ['full-bleed-offset']
+		modifiers: ['full-bleed-offset'],
+		layout: (content.topper && content.topper.layout) ? content.topper.layout : 'full-bleed-offset'
 	};
 };
 
@@ -190,7 +191,7 @@ const getTopperSettings = (content, flags = {}) => {
 	content.topper = content.topper || {};
 
 	if (isLiveBlogV2(content)) {
-		return useLiveBlogV2();
+		return useLiveBlogV2(content);
 	} else if (isPackageArticlesWithExtraTheme(content)) {
 		return useExtraThemeTopper();
 	} else if (isPackage(content)) {
