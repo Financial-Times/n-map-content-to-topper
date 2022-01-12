@@ -29,6 +29,31 @@ describe('Get topper settings', () => {
 				modifiers: ['full-bleed-offset']
 			});
 		});
+
+		describe('When a layout exists', () => {
+			it('uses the layout', () => {
+				const topper = getTopperSettings({
+					type: 'live-blog-package',
+					topper: {
+						layout: 'example-layout'
+					}
+				});
+
+				expect(topper.layout).to.equal('example-layout');
+			});
+		});
+
+		describe('When a layout does NOT exists', () => {
+			it('defaults the layout', () => {
+				const topper = getTopperSettings({
+					type: 'live-blog-package'
+				});
+
+				expect(topper.layout).to.equal('full-bleed-offset');
+			});
+		});
+
+
 	});
 
 	describe('Package articles with an `extra` theme', () => {
