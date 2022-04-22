@@ -56,7 +56,7 @@ references:
     tags:
       ignore: /.*/
     branches:
-      ignore: /(^renovate-.*|^nori/.*|^main)/
+      ignore: /(^renovate-.*|^nori/.*)/
 
 version: 2
 
