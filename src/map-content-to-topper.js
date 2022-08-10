@@ -25,9 +25,7 @@ module.exports = (content, flags = {}) => {
 		{
 			headline: topper.headline || content.title,
 			standfirst:
-				content.descriptionHTML ||
-				topper.standfirst ||
-				content.standfirst,
+				content.descriptionHTML || topper.standfirst || content.standfirst,
 			myFtButton: {
 				variant: myFtButtonVariant(settings.backgroundColour),
 				followPlusDigestEmail: followPlusDigestEmail(flags)

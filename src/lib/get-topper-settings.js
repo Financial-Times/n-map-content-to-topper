@@ -39,7 +39,10 @@ const useLiveBlogV2 = (content) => {
 		largeHeadline: true,
 		backgroundColour: 'paper',
 		modifiers: ['full-bleed-offset'],
-		layout: (content.topper && content.topper.layout) ? content.topper.layout : 'full-bleed-offset'
+		layout:
+			content.topper && content.topper.layout
+				? content.topper.layout
+				: 'full-bleed-offset'
 	};
 };
 
@@ -55,7 +58,7 @@ const useExtraThemeTopper = () => {
 
 const usePackageTopper = (content) => {
 	const themeMap = {
-		'basic': {
+		basic: {
 			bgColour: 'wheat',
 			layout: 'split-text-left',
 			largeHeadline: true
@@ -65,7 +68,7 @@ const usePackageTopper = (content) => {
 			layout: 'split-text-left',
 			largeHeadline: true
 		},
-		'extra': {
+		extra: {
 			bgColour: 'slate',
 			layout: 'split-text-left',
 			largeHeadline: true

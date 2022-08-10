@@ -52,8 +52,6 @@ describe('Get topper settings', () => {
 				expect(topper.layout).to.equal('full-bleed-offset');
 			});
 		});
-
-
 	});
 
 	describe('Package articles with an `extra` theme', () => {
@@ -88,11 +86,7 @@ describe('Get topper settings', () => {
 				layout: 'split-text-left',
 				largeHeadline: true,
 				backgroundColour: 'slate',
-				modifiers: [
-					'split-text-left',
-					'package',
-					'package-extra-wide'
-				]
+				modifiers: ['split-text-left', 'package', 'package-extra-wide']
 			});
 		});
 	});
@@ -214,10 +208,7 @@ describe('Get topper settings', () => {
 		});
 
 		it('does not have enhanced behaviour if `onboardingMessaging` parameter is not set', (done) => {
-			const topper = getTopperSettings(
-				{},
-				{ onboardingMessaging: undefined }
-			);
+			const topper = getTopperSettings({}, { onboardingMessaging: undefined });
 			expect(topper.myFtButton.followPlusDigestEmail).to.be.false;
 			done();
 		});
