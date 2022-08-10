@@ -103,5 +103,5 @@ dist
 # TernJS port file
 .tern-port
 
-# We don't do package-lock.json, see https://github.com/Financial-Times/next/issues/156
-package-lock.json
+
+.vscode
