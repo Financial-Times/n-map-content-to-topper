@@ -153,22 +153,32 @@ const useBrandedTopper = (content, flags) => {
 	const fthead = headshotConcepts[0] ? headshotConcepts[0].value : '';
 	const modifiers = fthead ? ['branded', 'has-headshot'] : ['branded'];
 	const opinionGenreConceptId = '6da31a37-691f-4908-896f-2829ebe2309e';
-
+	const alphavilleConceptId = '89d15f70-640d-11e4-9803-0800200c9a66';
 	let backgroundColour;
 	let headshotTint;
-	let isOpinion = false;
+	let isOpinion =
+		content.genreConcept && content.genreConcept.id === opinionGenreConceptId
+			? true
+			: false;
+	let isAlphaville =
+		content.brandConcept && content.brandConcept.id === alphavilleConceptId
+			? true
+			: false;
+	let myFtButtonVariant = 'standard';
 
-	if (
-		content.genreConcept &&
-		content.genreConcept.id === opinionGenreConceptId
-	) {
+	if (isOpinion) {
 		backgroundColour =
 			content.containedIn && content.containedIn.length ? 'wheat' : 'sky';
+
+		myFtButtonVariant = backgroundColour === 'sky' ? 'opinion' : 'standard';
 		modifiers.push('opinion');
 		headshotTint = '054593,d6d5d3';
 		isOpinion = true;
-	} else {
+	} else if (isAlphaville) {
+		myFtButtonVariant = 'monochrome';
 		backgroundColour = 'matisse';
+	} else {
+		backgroundColour = 'wheat';
 	}
 
 	if (content.topper && content.topper.backgroundColour) {
@@ -181,10 +191,11 @@ const useBrandedTopper = (content, flags) => {
 		includesTeaser: true,
 		modifiers,
 		isOpinion,
+		isAlphaville,
 		headshotTint,
 		fthead,
 		myFtButton: {
-			variant: backgroundColour === 'sky' ? 'opinion' : 'standard',
+			variant: myFtButtonVariant,
 			followPlusDigestEmail: followPlusDigestEmail(flags)
 		}
 	};
