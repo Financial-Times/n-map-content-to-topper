@@ -168,7 +168,7 @@ const useBrandedTopper = (content, flags) => {
 		headshotTint = '054593,d6d5d3';
 		isOpinion = true;
 	} else {
-		backgroundColour = 'wheat';
+		backgroundColour = 'matisse';
 	}
 
 	if (content.topper && content.topper.backgroundColour) {
