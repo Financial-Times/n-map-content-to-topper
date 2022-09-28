@@ -175,7 +175,7 @@ const useBrandedTopper = (content, flags) => {
 		headshotTint = '054593,d6d5d3';
 		isOpinion = true;
 	} else if (isAlphaville) {
-		myFtButtonVariant = 'monochrome';
+		myFtButtonVariant = 'alphaville';
 		backgroundColour = 'matisse';
 	} else {
 		backgroundColour = 'wheat';
