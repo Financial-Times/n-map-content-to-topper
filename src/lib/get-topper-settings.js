@@ -130,7 +130,7 @@ const usePodcastTopper = (content, flags) => {
 		includesImage: true,
 		fthead: content.mainImage && content.mainImage.url,
 		modifiers: ['branded', 'has-headshot'],
-		standfirst: content.byline,
+		standfirst: content.standfirst,
 		myFtButton: {
 			variant: 'inverse',
 			followPlusDigestEmail: followPlusDigestEmail(flags)
