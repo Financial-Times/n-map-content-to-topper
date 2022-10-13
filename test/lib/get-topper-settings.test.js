@@ -119,7 +119,7 @@ describe('Get topper settings', () => {
 		it('returns the podcast topper', () => {
 			const topper = getTopperSettings({
 				subtype: 'podcast',
-				byline: 'byline',
+				standfirst: 'example-standfirst',
 				mainImage: {
 					url: 'mainImageUrl'
 				}
@@ -128,7 +128,7 @@ describe('Get topper settings', () => {
 			expect(topper).to.deep.include({
 				isPodcast: true,
 				fthead: 'mainImageUrl',
-				standfirst: 'byline'
+				standfirst: 'example-standfirst'
 			});
 		});
 	});
