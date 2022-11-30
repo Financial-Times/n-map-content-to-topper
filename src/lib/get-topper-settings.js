@@ -1,6 +1,7 @@
 const themeImageRatio = {
 	'split-text-center': 'split',
 	'split-text-left': 'split',
+	'split-text-portrait-left': 'split',
 	'full-bleed-image-center': 'full-bleed',
 	'full-bleed-image-left': 'full-bleed',
 	'full-bleed-offset': 'full-bleed'
