@@ -1,11 +1,11 @@
 const themeImageRatio = {
 	'split-text-center': 'split',
 	'split-text-left': 'split',
-	'deep-portrait': 'split',
 	'full-bleed-image-center': 'full-bleed',
 	'full-bleed-image-left': 'full-bleed',
 	'full-bleed-offset': 'full-bleed',
-	'deep-landscape': 'full-bleed'
+	'deep-portrait': 'portrait',
+	'deep-landscape': 'landscape'
 };
 
 const isLiveBlogV2 = (content) => content.type === 'live-blog-package';
