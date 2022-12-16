@@ -4,7 +4,8 @@ const themeImageRatio = {
 	'deep-portrait': 'split',
 	'full-bleed-image-center': 'full-bleed',
 	'full-bleed-image-left': 'full-bleed',
-	'full-bleed-offset': 'full-bleed'
+	'full-bleed-offset': 'full-bleed',
+	'deep-landscape': 'full-bleed'
 };
 
 const isLiveBlogV2 = (content) => content.type === 'live-blog-package';
