@@ -54,3 +54,4 @@ const topper = mapContentToTopper(content, flags);
 ## Release Process
 
 The project is released automatically to npm via Github [Releases](https://www.github.com/financial-times/{repo}/releases). Create a release, and name the tag with the [Semantic Versioning](https://semver.org/) version you want. The CircleCI build for the tag will release that version to npm.
+test
