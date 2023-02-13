@@ -98,12 +98,18 @@ const usePackageTopper = (content) => {
 	};
 };
 
-const useEditoriallySelectedTopper = (content) => {
+const useEditoriallySelectedTopper = (content, flags) => {
 	let backgroundColour;
+	let myFtButtonVariant = 'standard';
 
 	// Convert old palette colours to new palette colours from Methode
 	if (content.topper.layout === 'full-bleed-offset') {
 		backgroundColour = 'wheat';
+	} else if (content.topper.layout === 'deep-landscape') {
+		if (content.topper.backgroundColour === 'wheat') {
+			backgroundColour = 'white'
+		}
+		myFtButtonVariant = 'opinion'
 	} else if (
 		content.topper.backgroundColour === 'pink' ||
 		content.topper.backgroundColour === 'auto'
@@ -120,7 +126,11 @@ const useEditoriallySelectedTopper = (content) => {
 		largeHeadline: true,
 		backgroundColour,
 		modifiers: [content.topper.layout],
-		includesImage: true
+		includesImage: true,
+		myFtButton: {
+			variant: myFtButtonVariant,
+			followPlusDigestEmail: followPlusDigestEmail(flags)
+		}
 	};
 };
 
@@ -213,7 +223,7 @@ const getTopperSettings = (content, flags = {}) => {
 	} else if (isPackage(content)) {
 		return usePackageTopper(content);
 	} else if (isEditoriallySelected(content)) {
-		return useEditoriallySelectedTopper(content);
+		return useEditoriallySelectedTopper(content, flags);
 	} else if (isPodcast(content)) {
 		return usePodcastTopper(content, flags);
 	} else if (isBranded(content)) {
