@@ -100,16 +100,19 @@ const usePackageTopper = (content) => {
 
 const useEditoriallySelectedTopper = (content, flags) => {
 	let backgroundColour;
-	let myFtButtonVariant = 'standard';
+	let myFtButton;
 
 	// Convert old palette colours to new palette colours from Methode
 	if (content.topper.layout === 'full-bleed-offset') {
 		backgroundColour = 'wheat';
 	} else if (content.topper.layout === 'deep-landscape') {
-		if (content.topper.backgroundColour === 'wheat') {
+		if (['paper', 'wheat'].includes(content.topper.backgroundColour)) {
 			backgroundColour = 'white'
 		}
-		myFtButtonVariant = 'opinion'
+		myFtButton = {
+			variant: 'opinion',
+			followPlusDigestEmail: followPlusDigestEmail(flags)
+		}
 	} else if (
 		content.topper.backgroundColour === 'pink' ||
 		content.topper.backgroundColour === 'auto'
@@ -121,17 +124,19 @@ const useEditoriallySelectedTopper = (content, flags) => {
 		backgroundColour = content.topper.backgroundColour || 'wheat';
 	}
 
-	return {
+	const topper = {
 		layout: content.topper.layout,
 		largeHeadline: true,
 		backgroundColour,
 		modifiers: [content.topper.layout],
 		includesImage: true,
-		myFtButton: {
-			variant: myFtButtonVariant,
-			followPlusDigestEmail: followPlusDigestEmail(flags)
-		}
 	};
+
+	if (myFtButton) {
+		topper.myFtButton = myFtButton;
+	}
+
+	return topper;
 };
 
 const usePodcastTopper = (content, flags) => {
