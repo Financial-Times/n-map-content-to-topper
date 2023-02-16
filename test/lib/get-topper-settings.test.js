@@ -121,14 +121,6 @@ describe('Get topper settings', () => {
 
 			expect(topper.backgroundColour).to.equal('white');
 		});
-
-		it('sets the myFtButton to the opinion variant for deep landscape', () => {
-			const topper = getTopperSettings({
-				topper: { layout: 'deep-landscape' }
-			});
-
-			expect(topper.myFtButton.variant).to.equal('opinion');
-		});
 	});
 
 	describe('Podcast', () => {

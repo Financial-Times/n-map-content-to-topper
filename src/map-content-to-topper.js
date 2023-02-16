@@ -4,16 +4,13 @@ const {
 	getTopperSettings
 } = require('./lib/get-topper-settings');
 
-const {
-	hasDarkBackground,
-	hasLightBackground
-} = require('./lib/utils')
+const { hasDarkBackground, hasLightBackground } = require('./lib/utils');
 
 const myFtButtonVariant = (backgroundColour, layout) => {
 	if (layout === 'deep-landscape' && hasLightBackground(backgroundColour)) {
-		return 'opinion'
+		return 'opinion';
 	}
-	return !backgroundColour || hasLightBackground ? 'standard' : 'monochrome';
+	return !backgroundColour || hasLightBackground(backgroundColour) ? 'standard' : 'monochrome';
 };
 
 module.exports = (content, flags = {}) => {
