@@ -1,3 +1,4 @@
+const { hasDarkBackground } = require('./utils');
 const themeImageRatio = {
 	'split-text-center': 'split',
 	'split-text-left': 'split',
@@ -98,20 +99,15 @@ const usePackageTopper = (content) => {
 	};
 };
 
-const useEditoriallySelectedTopper = (content, flags) => {
+const useEditoriallySelectedTopper = (content) => {
 	let backgroundColour;
-	let myFtButton;
 
 	// Convert old palette colours to new palette colours from Methode
 	if (content.topper.layout === 'full-bleed-offset') {
 		backgroundColour = 'wheat';
 	} else if (content.topper.layout === 'deep-landscape') {
-		if (['paper', 'wheat'].includes(content.topper.backgroundColour)) {
-			backgroundColour = 'white'
-		}
-		myFtButton = {
-			variant: 'opinion',
-			followPlusDigestEmail: followPlusDigestEmail(flags)
+		if (!hasDarkBackground(content.topper.backgroundColour)) {
+			backgroundColour = 'white';
 		}
 	} else if (
 		content.topper.backgroundColour === 'pink' ||
@@ -124,19 +120,13 @@ const useEditoriallySelectedTopper = (content, flags) => {
 		backgroundColour = content.topper.backgroundColour || 'wheat';
 	}
 
-	const topper = {
+	return {
 		layout: content.topper.layout,
 		largeHeadline: true,
 		backgroundColour,
 		modifiers: [content.topper.layout],
-		includesImage: true,
+		includesImage: true
 	};
-
-	if (myFtButton) {
-		topper.myFtButton = myFtButton;
-	}
-
-	return topper;
 };
 
 const usePodcastTopper = (content, flags) => {
