@@ -8,7 +8,7 @@ const { hasDarkBackground, hasLightBackground } = require('./lib/utils');
 
 const myFtButtonVariant = (backgroundColour, layout) => {
 	if (layout === 'deep-landscape' && hasLightBackground(backgroundColour)) {
-		return 'opinion';
+		return 'inverse-monochrome';
 	}
 	return !backgroundColour || hasLightBackground(backgroundColour) ? 'standard' : 'monochrome';
 };
