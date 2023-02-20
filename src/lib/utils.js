@@ -11,4 +11,4 @@ const hasLightBackground = (backgroundColour) => {
 module.exports = {
 	hasDarkBackground,
 	hasLightBackground
-}
+};
