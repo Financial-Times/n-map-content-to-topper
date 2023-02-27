@@ -218,7 +218,7 @@ const getTopperSettings = (content, flags = {}) => {
 	} else if (isPackage(content)) {
 		return usePackageTopper(content);
 	} else if (isEditoriallySelected(content)) {
-		return useEditoriallySelectedTopper(content, flags);
+		return useEditoriallySelectedTopper(content);
 	} else if (isPodcast(content)) {
 		return usePodcastTopper(content, flags);
 	} else if (isBranded(content)) {
