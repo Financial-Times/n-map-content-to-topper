@@ -113,6 +113,14 @@ describe('Get topper settings', () => {
 
 			expect(topper.backgroundColour).to.equal('wheat');
 		});
+
+		it('sets the `backgroundColour` to `white` if layout is deep landscape and background is light', () => {
+			const topper = getTopperSettings({
+				topper: { layout: 'deep-landscape', backgroundColour: 'paper' }
+			});
+
+			expect(topper.backgroundColour).to.equal('white');
+		});
 	});
 
 	describe('Podcast', () => {

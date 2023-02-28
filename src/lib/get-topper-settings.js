@@ -1,3 +1,4 @@
+const { hasDarkBackground } = require('./utils');
 const themeImageRatio = {
 	'split-text-center': 'split',
 	'split-text-left': 'split',
@@ -104,6 +105,10 @@ const useEditoriallySelectedTopper = (content) => {
 	// Convert old palette colours to new palette colours from Methode
 	if (content.topper.layout === 'full-bleed-offset') {
 		backgroundColour = 'wheat';
+	} else if (content.topper.layout === 'deep-landscape') {
+		if (!hasDarkBackground(content.topper.backgroundColour)) {
+			backgroundColour = 'white';
+		}
 	} else if (
 		content.topper.backgroundColour === 'pink' ||
 		content.topper.backgroundColour === 'auto'

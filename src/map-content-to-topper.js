@@ -4,15 +4,15 @@ const {
 	getTopperSettings
 } = require('./lib/get-topper-settings');
 
-const myFtButtonVariant = (backgroundColour) => {
-	const lightBackgrounds = ['paper', 'wheat', 'white'];
-	const hasLightBackground = lightBackgrounds.indexOf(backgroundColour) > -1;
-	return !backgroundColour || hasLightBackground ? 'standard' : 'monochrome';
-};
+const { hasDarkBackground, hasLightBackground } = require('./lib/utils');
 
-const hasDarkBackground = (backgroundColour) => {
-	const darkBackgrounds = ['black', 'slate', 'oxford', 'claret', 'crimson'];
-	return darkBackgrounds.indexOf(backgroundColour) > -1;
+const myFtButtonVariant = (backgroundColour, layout) => {
+	if (layout === 'deep-landscape' && hasLightBackground(backgroundColour)) {
+		return 'inverse-monochrome';
+	}
+	return !backgroundColour || hasLightBackground(backgroundColour)
+		? 'standard'
+		: 'monochrome';
 };
 
 module.exports = (content, flags = {}) => {
@@ -27,7 +27,7 @@ module.exports = (content, flags = {}) => {
 			standfirst:
 				content.descriptionHTML || topper.standfirst || content.standfirst,
 			myFtButton: {
-				variant: myFtButtonVariant(settings.backgroundColour),
+				variant: myFtButtonVariant(settings.backgroundColour, settings.layout),
 				followPlusDigestEmail: followPlusDigestEmail(flags)
 			},
 			themeImageRatio: themeImageRatio[settings.layout]
