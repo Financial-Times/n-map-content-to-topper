@@ -121,6 +121,29 @@ describe('Get topper settings', () => {
 
 			expect(topper.backgroundColour).to.equal('white');
 		});
+
+		describe('When a background Box is present', () => {
+			it('sets the `backgroundColour` to `white` if layout is deep landscape and background Box is light', () => {
+				const topper = getTopperSettings({
+					topper: {
+						layout: 'deep-landscape',
+						backgroundBox: 'light'
+					}
+				});
+
+				expect(topper.backgroundColour).to.equal('white');
+			});
+			it('sets the `backgroundColour` to `black` if layout is deep landscape and background Box is dark', () => {
+				const topper = getTopperSettings({
+					topper: {
+						layout: 'deep-landscape',
+						backgroundBox: 'dark'
+					}
+				});
+
+				expect(topper.backgroundColour).to.equal('black');
+			});
+		});
 	});
 
 	describe('Podcast', () => {
