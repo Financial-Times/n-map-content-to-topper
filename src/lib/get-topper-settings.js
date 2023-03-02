@@ -106,7 +106,13 @@ const useEditoriallySelectedTopper = (content) => {
 	if (content.topper.layout === 'full-bleed-offset') {
 		backgroundColour = 'wheat';
 	} else if (content.topper.layout === 'deep-landscape') {
-		if (!hasDarkBackground(content.topper.backgroundColour)) {
+		// If the backgroundBox is present, use its color to determine a background colour
+		// The background color won't be visible due to the overlapping image, however, it's needed to
+		// determine the text color
+		if (content.topper.backgroundBox) {
+			backgroundColour =
+				content.topper.backgroundBox === 'light' ? 'white' : 'black';
+		} else if (!hasDarkBackground(content.topper.backgroundColour)) {
 			backgroundColour = 'white';
 		}
 	} else if (
