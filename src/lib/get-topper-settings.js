@@ -114,6 +114,8 @@ const useEditoriallySelectedTopper = (content) => {
 				content.topper.backgroundBox === 'light' ? 'white' : 'black';
 		} else if (!hasDarkBackground(content.topper.backgroundColour)) {
 			backgroundColour = 'white';
+		} else {
+			backgroundColour = 'black';
 		}
 	} else if (
 		content.topper.backgroundColour === 'pink' ||
