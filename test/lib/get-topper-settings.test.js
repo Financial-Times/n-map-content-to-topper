@@ -114,50 +114,28 @@ describe('Get topper settings', () => {
 			expect(topper.backgroundColour).to.equal('wheat');
 		});
 
-		it('sets the `backgroundColour` to `white` if layout is deep landscape and background is light', () => {
+		it('sets the `backgroundColour` to `white` if layout is deep landscape and the background is auto', () => {
 			const topper = getTopperSettings({
-				topper: { layout: 'deep-landscape', backgroundColour: 'paper' }
+				topper: { layout: 'deep-landscape', backgroundColour: 'auto' }
 			});
 
 			expect(topper.backgroundColour).to.equal('white');
 		});
 
-		it('sets the `backgroundColour` to `black` if layout is deep landscape and background is dark', () => {
+		it('sets the `backgroundColour` to `black` if layout is deep landscape and background is slate', () => {
 			const topper = getTopperSettings({
 				topper: { layout: 'deep-landscape', backgroundColour: 'slate' }
 			});
 
 			expect(topper.backgroundColour).to.equal('black');
 		});
+
 		it('sets the `backgroundColour` to `white` if layout is deep landscape and background is undefined', () => {
 			const topper = getTopperSettings({
 				topper: { layout: 'deep-landscape' }
 			});
 
 			expect(topper.backgroundColour).to.equal('white');
-		});
-
-		describe('When a background Box is present', () => {
-			it('sets the `backgroundColour` to `white` if layout is deep landscape and background Box is light', () => {
-				const topper = getTopperSettings({
-					topper: {
-						layout: 'deep-landscape',
-						backgroundBox: 'light'
-					}
-				});
-
-				expect(topper.backgroundColour).to.equal('white');
-			});
-			it('sets the `backgroundColour` to `black` if layout is deep landscape and background Box is dark', () => {
-				const topper = getTopperSettings({
-					topper: {
-						layout: 'deep-landscape',
-						backgroundBox: 'dark'
-					}
-				});
-
-				expect(topper.backgroundColour).to.equal('black');
-			});
 		});
 	});
 
