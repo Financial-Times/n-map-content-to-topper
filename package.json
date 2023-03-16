@@ -23,7 +23,7 @@
 	},
 	"homepage": "https://github.com/Financial-Times/n-map-content-to-topper#readme",
 	"engines": {
-		"node": "16.x"
+		"node": "18.x"
 	},
 	"devDependencies": {
 		"@dotcom-tool-kit/circleci": "^2.1.4",
