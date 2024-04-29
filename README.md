@@ -14,8 +14,7 @@ A library for mapping content to a topper on FT.com and the App.
 
 ## Requirements
 
-- Node >12.x
-- [Vault](https://github.com/Financial-Times/vault/wiki/Getting-Started-With-Vault)
+- Node >18.x
 
 ## Installation
 
