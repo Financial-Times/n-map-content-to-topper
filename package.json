@@ -4,7 +4,7 @@
 	"description": "A library for mapping content to a topper on FT.com and the App",
 	"main": "main.js",
 	"scripts": {
-		"prepare": "npx snyk protect || npx snyk protect -d || true && husky install",
+		"prepare": "husky install",
 		"precommit": "secret-squirrel && npm run format && npm run fix",
 		"prepush": "npm run test",
 		"fix": "eslint '**/*.{js,json,yml}' --fix",
@@ -44,8 +44,7 @@
 		"husky": "^8.0.0",
 		"mocha": "^8.1.1",
 		"proxyquire": "^2.1.3",
-		"sinon": "^9.0.3",
-		"snyk": "^1.379.2"
+		"sinon": "^9.0.3"
 	},
 	"volta": {
 		"node": "18.20.2",
