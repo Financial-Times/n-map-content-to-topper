@@ -1,1 +1,5 @@
 * @financial-times/storytelling
+
+
+# Allow Dependency Auto-Merger to approve dependency bump PRs
+**/package*.json @ft-dependency-auto-merger @financial-times/storytelling
