@@ -5,7 +5,7 @@ plugins:
   - '@dotcom-tool-kit/circleci'
   - '@dotcom-tool-kit/npm'
   - '@dotcom-tool-kit/circleci-npm'
-hooks:
+commands:
   test:local:
     - Eslint
     - Mocha
@@ -13,12 +13,16 @@ hooks:
     - Eslint
     - Mocha
 options:
-  '@dotcom-tool-kit/eslint':
-    files: '**/*.{js,yml,json}'
-  '@dotcom-tool-kit/prettier':
-    files: '**/*.{js,yml,json}'
-  '@dotcom-tool-kit/mocha':
-    configPath: '.mocharc.json'
-    files: ''
-  '@dotcom-tool-kit/circleci':
-    nodeVersion: 18.16-browsers
+  plugins:
+    '@dotcom-tool-kit/circleci':
+      nodeVersion: 18.16-browsers
+  tasks:
+    Eslint:
+      files: 
+        - '**/*.{js,yml,json}'
+    Prettier:
+      files:
+        - '**/*.{js,yml,json}'
+    Mocha:
+      configPath: '.mocharc.json'
+      files: ''

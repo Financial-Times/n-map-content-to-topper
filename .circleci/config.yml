@@ -5,7 +5,7 @@ orbs:
 executors:
   node:
     docker:
-      - image: cimg/node:18.16-browsers
+      - image: cimg/node:18.19-browsers
 jobs:
   checkout:
     docker:
@@ -26,50 +26,31 @@ workflows:
           filters:
             tags:
               only: /^v\d+\.\d+\.\d+(-.+)?/
-      - waiting-for-approval:
-          type: approval
-          filters:
-            branches:
-              only: /(^renovate-.*|^nori/.*)/
       - tool-kit/setup:
-          name: tool-kit/setup-<< matrix.executor >>
+          executor: node
           requires:
             - checkout
-            - waiting-for-approval
-          matrix:
-            parameters:
-              executor:
-                - node
           filters:
             tags:
               only: /^v\d+\.\d+\.\d+(-.+)?/
       - tool-kit/build:
-          name: tool-kit/build-<< matrix.executor >>
+          executor: node
           requires:
-            - tool-kit/setup-<< matrix.executor >>
-          matrix:
-            parameters:
-              executor:
-                - node
+            - tool-kit/setup
           filters:
             tags:
               only: /^v\d+\.\d+\.\d+(-.+)?/
       - tool-kit/test:
-          name: tool-kit/test-<< matrix.executor >>
+          executor: node
           requires:
-            - tool-kit/build-<< matrix.executor >>
-          matrix:
-            parameters:
-              executor:
-                - node
+            - tool-kit/build
           filters:
             tags:
               only: /^v\d+\.\d+\.\d+(-.+)?/
       - tool-kit/publish-tag:
-          requires:
-            - tool-kit/test-node
-          name: tool-kit/publish-tag-node
           executor: node
+          requires:
+            - tool-kit/test
           filters:
             tags:
               only: /^v\d+\.\d+\.\d+(-.+)?/
@@ -88,26 +69,14 @@ workflows:
     jobs:
       - checkout
       - tool-kit/setup:
-          name: tool-kit/setup-<< matrix.executor >>
+          executor: node
           requires:
             - checkout
-          matrix:
-            parameters:
-              executor:
-                - node
       - tool-kit/build:
-          name: tool-kit/build-<< matrix.executor >>
+          executor: node
           requires:
-            - tool-kit/setup-<< matrix.executor >>
-          matrix:
-            parameters:
-              executor:
-                - node
+            - tool-kit/setup
       - tool-kit/test:
-          name: tool-kit/test-<< matrix.executor >>
+          executor: node
           requires:
-            - tool-kit/build-<< matrix.executor >>
-          matrix:
-            parameters:
-              executor:
-                - node
+            - tool-kit/build
