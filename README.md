@@ -1,5 +1,11 @@
 # n-map-content-to-topper
 
+⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+DEPRECATED
+With the introduction of the new Content Pipeline in both DotCom and FT App this package is deprecated.
+We will kill it after it gets removed from the FT-App that is still supporting the old content pipeline (Elastic Search)
+⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+
 [![CircleCI](https://circleci.com/gh/Financial-Times/n-map-content-to-topper.svg?style=svg&circle-token=934a725e2f363da1ac042947bb785c4d45795339)](https://circleci.com/gh/Financial-Times/n-map-content-to-topper)
 
 A library for mapping content to a topper on FT.com and the App.
